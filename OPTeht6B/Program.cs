@@ -6,26 +6,39 @@ namespace OPTeht6B
     {
         static void Main(string[] args)
         {
-            Console.Write("Anna lause: ");
-            string tutkittava = Console.ReadLine();
+            int kantaluku, eksponentti;
+            Console.Write("Anna kantaluku:");
+            string annettuArvo = Console.ReadLine();
+            while (!Int32.TryParse(annettuArvo, out kantaluku))
+            {
+                Console.Write("Väärä tyyppi, yritä uudelleen: ");
+                annettuArvo = Console.ReadLine();
+            }
+            Console.Write("Anna eksponentti:");
+            annettuArvo = Console.ReadLine();
+            while (!Int32.TryParse(annettuArvo, out eksponentti))
+            {
+                Console.Write("Väärä tyyppi, yritä uudelleen: ");
+                annettuArvo = Console.ReadLine();
+            }
             //Metodin kutsu:
-            int tulos = LaskeVL(tutkittava);
-            string yksMoni = tulos == 1 ? "kappale" : "kappaletta";
-            Console.WriteLine("Välilyöntien lukumäärä lauseessa \"{0}\" on {1} {2}.", tutkittava, tulos, yksMoni);
+            int tulos = KorotaPotenssiin(kantaluku, eksponentti);
+            Console.WriteLine("Vastaus: {0}", tulos) ;
+            Console.WriteLine("Luku {0} potenssiin {1} = {2}", kantaluku, eksponentti, tulos);
 
         }
         //Määrittely
-        private static int LaskeVL(string str)
+        private static int KorotaPotenssiin(int kanta, int ekspo)
         {
-            int lukumaara = 0;
-            string str1;
-            for (int i = 0; i < str.Length; i++)
+            int vastaus = 1;
+            for(int i = 1; i <=ekspo; i++)
             {
-                str1 = str.Substring(i, 1);
-                if (str1 == " ")
-                    lukumaara++;
+                vastaus = vastaus * kanta;
             }
-            return lukumaara;
+            return vastaus;
+
         }
+        
+        
     }
 }
